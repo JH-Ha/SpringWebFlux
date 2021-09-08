@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-public class VideoEntity {
-    public VideoEntity() {
+public class VideoInfo {
+    public VideoInfo() {
 
     }
 

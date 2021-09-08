@@ -1,6 +1,11 @@
 package com.video.streaming.controller;
 
-import com.video.streaming.entity.VideoEntity;
+import com.video.streaming.dto.VideoInfoDto;
+import com.video.streaming.entity.VideoInfo;
+import com.video.streaming.service.StreamingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +17,14 @@ import java.util.List;
 
 @Controller
 public class MainController {
-    static List<VideoEntity> videos;
 
-    static {
-        videos = new ArrayList<>();
-        videos.add(new VideoEntity(1L, "roujin.mp4", 1L, LocalDateTime.now()));
-    }
+    @Autowired
+    StreamingService streamingService;
 
     @GetMapping("/")
     public String mainPage(Model model) {
-        model.addAttribute("videos", videos);
+        Page<VideoInfoDto> page = streamingService.getVideoInfoList(Pageable.unpaged());
+        model.addAttribute("videos", page.getContent());
         return "index";
     }
 
