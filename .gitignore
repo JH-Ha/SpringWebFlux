@@ -33,7 +33,7 @@ build/
 .vscode/
 
 ### Video Resouces ###
-src/main/resources/videos
+src/main/resources/videoResources
 
 ### Maven ###
 .mvn
