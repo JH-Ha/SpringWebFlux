@@ -14,7 +14,7 @@
             trVideoList.forEach(function (ele) {
                 ele.addEventListener("click", function () {
                     console.log(ele.dataset);
-                    location.href = `/view/video/${ele.dataset.videoName}`;
+                    location.href = `/view/video/${ele.dataset.videoId}`;
                 });
             });
         });
@@ -37,7 +37,7 @@
         </thead>
         <tbody>
 
-        <tr class="tr-video" th:each="video : ${videos}" th:data-video-name="${video.name}">
+        <tr class="tr-video" th:each="video : ${videos}" th:data-video-id="${video.id}">
             <td th:text="${video.id}"></td>
             <td th:text="${video.name}"></td>
             <td th:text="${video.uploadDate}"></td>

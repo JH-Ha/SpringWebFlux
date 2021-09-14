@@ -3,6 +3,48 @@
     <title>Video Streaming</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width"/>
+    <style>
+        :root {
+            --video-margin: 20px;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 900px) {
+            .video-container {
+                width: 100%;
+            }
+        }
+
+        @media screen and (min-width: 901px) {
+            .video-container {
+                width: 75%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .video-container video {
+                max-width: 1280px;
+                max-height: 720px;
+
+            }
+        }
+
+        .video-container video {
+            margin: var(--video-margin);
+            width: calc(100% - 2 * var(--video-margin));
+        }
+
+        .content {
+            background: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -10,7 +52,51 @@
         test
     </div>
     <h2>Video Streaming</h2>
-    <video src="/video/roujin360p" width="100%" controls></video>
+    <div class="content">
+        <div class="video-container">
+            <video th:src="@{/video/{id}(id=${id})}" controls></video>
+        </div>
+        <div>
+
+        </div>
+        <div class="top-info">
+            <div class="hash-tag">
+
+            </div>
+            <div class="title">
+                제목
+            </div>
+            <div class="info">
+                <div class="view-count">
+                    조회수
+                </div>
+                <div class="like">
+                    좋아요
+                </div>
+                <div class="dislike">
+                    싫어요
+                </div>
+                <div class="share">
+                    공유
+                </div>
+            </div>
+        </div>
+        <div class="video-info">
+            <div>
+                사진
+            </div>
+            <div>
+                <div>
+                    채널명
+                </div>
+                <div>구독자 수</div>
+                <div>비디오 설명</div>
+            </div>
+            <div>
+                구독
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

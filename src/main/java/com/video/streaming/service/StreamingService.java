@@ -27,16 +27,12 @@ public class StreamingService {
     @Autowired
     private VideoRepository videoRepository;
 
-    @PostConstruct
-    public void init() {
-//        saveVideo(new VideoInfo(null, "roujin", 0L, LocalDateTime.now()));
-//        Pageable pageable = PageRequest.of(0, 10);
-//        Page<VideoInfoDto> videoInfoDtoList = getVideoInfoList(pageable);
-
-    }
-
     public void saveVideo(VideoInfo videoInfo) {
         videoRepository.saveVideo(videoInfo);
+    }
+
+    public VideoInfoDto getVideoInfo(Long id) {
+        return videoRepository.getOneVideo(id);
     }
 
     public Page<VideoInfoDto> getVideoInfoList(Pageable pageable) {

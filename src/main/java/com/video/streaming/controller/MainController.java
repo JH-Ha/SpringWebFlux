@@ -28,8 +28,9 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/view/video/{videoName}")
-    public String viewVideo(@PathVariable String videoName) {
+    @GetMapping("/view/video/{id}")
+    public String viewVideo(@PathVariable String id, Model model) {
+        model.addAttribute("id", id);
         return "video";
     }
 }

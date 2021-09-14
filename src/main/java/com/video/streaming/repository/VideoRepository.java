@@ -33,4 +33,15 @@ public class VideoRepository {
                 .fetch();
         return new PageImpl<>(videoInfoDtoList);
     }
+
+    public VideoInfoDto getOneVideo(Long id) {
+        JPAQuery<VideoInfo> query = new JPAQuery<>(em);
+        QVideoInfo qVideoInfo = QVideoInfo.videoInfo;
+        VideoInfoDto videoInfoDto = query.select(Projections.constructor(VideoInfoDto.class,
+                        qVideoInfo.id, qVideoInfo.name, qVideoInfo.uploadDate, qVideoInfo.viewCount))
+                .from(qVideoInfo)
+                .where(qVideoInfo.id.eq(id))
+                .fetchFirst();
+        return videoInfoDto;
+    }
 }

@@ -1,5 +1,6 @@
 package com.video.streaming.controller;
 
+import com.video.streaming.dto.VideoInfoDto;
 import com.video.streaming.service.StreamingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -15,10 +16,11 @@ public class StreamingController {
     @Autowired
     private StreamingService streamingService;
 
-    @GetMapping(value = "video/{title}", produces = "video/mp4")
-    public Mono<Resource> getVideos(@PathVariable String title, @RequestHeader("Range") String range) {
+    @GetMapping(value = "video/{id}", produces = "video/mp4")
+    public Mono<Resource> getVideos(@PathVariable Long id, @RequestHeader("Range") String range) {
         System.out.println("range in bytes() : " + range);
-        return streamingService.getVideo(title);
+        VideoInfoDto videoInfoDto = streamingService.getVideoInfo(id);
+        return streamingService.getVideo(videoInfoDto.getName());
     }
 
 }
