@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
             crossorigin="anonymous"></script>
+    <style>
+        .tr-video {
+            cursor: pointer;
+        }
+
+        .container {
+            margin-top: 10px;
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let trVideoList = document.querySelectorAll("tr.tr-video");
@@ -21,10 +30,7 @@
     </script>
 </head>
 <body>
-<div>
-    <div>
-        test
-    </div>
+<div class="container">
     <h2>Video Streaming</h2>
     <table class="table table-striped">
         <thead>
@@ -40,7 +46,7 @@
         <tr class="tr-video" th:each="video : ${videos}" th:data-video-id="${video.id}">
             <td th:text="${video.id}"></td>
             <td th:text="${video.name}"></td>
-            <td th:text="${video.uploadDate}"></td>
+            <td th:text="${video.uploadDate.toLocalDate()}"></td>
             <td th:text="${video.viewCount}"></td>
         </tr>
         </tbody>

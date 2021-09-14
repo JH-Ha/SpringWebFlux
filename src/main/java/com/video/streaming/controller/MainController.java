@@ -29,8 +29,11 @@ public class MainController {
     }
 
     @GetMapping("/view/video/{id}")
-    public String viewVideo(@PathVariable String id, Model model) {
+    public String viewVideo(@PathVariable Long id, Model model) {
         model.addAttribute("id", id);
+        streamingService.updateViewCountByOne(id);
+        VideoInfoDto videoInfoDto = streamingService.getVideoInfo(id);
+        model.addAttribute("video", videoInfoDto);
         return "video";
     }
 }

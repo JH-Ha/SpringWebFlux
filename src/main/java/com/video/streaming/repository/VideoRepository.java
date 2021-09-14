@@ -20,7 +20,11 @@ public class VideoRepository {
     private EntityManager em;
 
     public void saveVideo(VideoInfo videoInfo) {
-        em.persist(videoInfo);
+        if (videoInfo.getId() == null) {
+            em.persist(videoInfo);
+        } else {
+            em.merge(videoInfo);
+        }
     }
 
     public Page<VideoInfoDto> findVideos(Pageable pageable) {
@@ -32,6 +36,21 @@ public class VideoRepository {
                 .from(qVideoInfo)
                 .fetch();
         return new PageImpl<>(videoInfoDtoList);
+    }
+
+    public void updateViewCountByOne(Long id) {
+        VideoInfo videoInfo = getOneVideoInfo(id);
+        videoInfo.setViewCount(videoInfo.getViewCount() + 1);
+        saveVideo(videoInfo);
+    }
+
+    public VideoInfo getOneVideoInfo(Long id) {
+        JPAQuery<VideoInfo> query = new JPAQuery<>(em);
+        QVideoInfo qVideoInfo = QVideoInfo.videoInfo;
+        VideoInfo videoInfo = query.select(qVideoInfo).from(qVideoInfo)
+                .where(qVideoInfo.id.eq(id))
+                .fetchFirst();
+        return videoInfo;
     }
 
     public VideoInfoDto getOneVideo(Long id) {

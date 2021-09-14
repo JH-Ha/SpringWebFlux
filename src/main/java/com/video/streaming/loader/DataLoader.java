@@ -23,7 +23,8 @@ public class DataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         streamingService.saveVideo(new VideoInfo(null, "老人漂流社会", 0L, LocalDateTime.now()));
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<VideoInfoDto> videoInfoDtoList = streamingService.getVideoInfoList(pageable);
+        streamingService.saveVideo(new VideoInfo(null, "君の名は", 0L, LocalDateTime.now()));
+        //Pageable pageable = PageRequest.of(0, 10);
+        //Page<VideoInfoDto> videoInfoDtoList = streamingService.getVideoInfoList(pageable);
     }
 }

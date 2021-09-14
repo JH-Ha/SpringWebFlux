@@ -2,7 +2,11 @@
 <head>
     <title>Video Streaming</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script
+            src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+            data-auto-a11y="true"
+    ></script>
     <style>
         :root {
             --video-margin: 20px;
@@ -15,87 +19,143 @@
             height: 100%;
         }
 
-        @media screen and (max-width: 900px) {
-            .video-container {
-                width: 100%;
+        @media screen  and (min-width: 1701px) {
+            .container {
+                width: 1280px;
             }
         }
 
-        @media screen and (min-width: 901px) {
-            .video-container {
+        @media screen and (max-width: 1700px) {
+            .container {
                 width: 75%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
-            .video-container video {
+            .container video {
                 max-width: 1280px;
                 max-height: 720px;
 
             }
         }
 
-        .video-container video {
+        @media screen and (max-width: 900px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+
+        .container video {
             margin: var(--video-margin);
             width: calc(100% - 2 * var(--video-margin));
         }
 
+        .video-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
         .content {
             background: #f9f9f9;
         }
+
+        .title {
+            font-size: 18px;
+        }
+
+        .view-count {
+            font-size: 14px;
+            color: #030303;
+            display: flex;
+        }
+
+        .home {
+            cursor: pointer;
+        }
+
+        .top-info .info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-container {
+            padding: 0 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            flex-basis: 200px;
+        }
+
+        .content {
+            height: 100%;
+        }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let homeBtn = document.querySelector(".home");
+            homeBtn.addEventListener("click", function () {
+                location.href = "/";
+            });
+        });
+    </script>
 </head>
 <body>
 <div>
-    <div>
-        test
+    <div class="home">
+        Home
     </div>
-    <h2>Video Streaming</h2>
     <div class="content">
-        <div class="video-container">
-            <video th:src="@{/video/{id}(id=${id})}" controls></video>
-        </div>
-        <div>
+        <div class="container">
+            <div class="video-container">
+                <video th:src="@{/video/{id}(id=${id})}" controls></video>
+            </div>
+            <div class="info-container">
+                <div class="top-info">
+                    <div class="hash-tag">
 
+                    </div>
+                    <div class="title" th:text="${video.name}">
+                    </div>
+                    <div class="info">
+                        <div class="view-count">
+                            <div th:text="${video.viewCount}"></div>
+                            &nbsp;views
+                        </div>
+                        <div class="button-container">
+                            <div class="like">
+                                <i class="far fa-thumbs-up"></i>0
+                            </div>
+                            <div class="dislike">
+                                <i class="far fa-thumbs-down"></i>0
+                            </div>
+                            <div class="share">
+                                SHARE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                <div class="video-info">-->
+                <!--                    <div>-->
+                <!--                        사진-->
+                <!--                    </div>-->
+                <!--                    <div>-->
+                <!--                        <div>-->
+                <!--                            채널명-->
+                <!--                        </div>-->
+                <!--                        <div>구독자 수</div>-->
+                <!--                        <div>비디오 설명</div>-->
+                <!--                    </div>-->
+                <!--                    <div>-->
+                <!--                        구독-->
+                <!--                    </div>-->
+                <!--                </div>-->
+            </div>
         </div>
-        <div class="top-info">
-            <div class="hash-tag">
 
-            </div>
-            <div class="title">
-                제목
-            </div>
-            <div class="info">
-                <div class="view-count">
-                    조회수
-                </div>
-                <div class="like">
-                    좋아요
-                </div>
-                <div class="dislike">
-                    싫어요
-                </div>
-                <div class="share">
-                    공유
-                </div>
-            </div>
-        </div>
-        <div class="video-info">
-            <div>
-                사진
-            </div>
-            <div>
-                <div>
-                    채널명
-                </div>
-                <div>구독자 수</div>
-                <div>비디오 설명</div>
-            </div>
-            <div>
-                구독
-            </div>
-        </div>
+
     </div>
 </div>
 </body>

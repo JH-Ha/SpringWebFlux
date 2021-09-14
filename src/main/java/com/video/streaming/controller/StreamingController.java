@@ -20,6 +20,7 @@ public class StreamingController {
     public Mono<Resource> getVideos(@PathVariable Long id, @RequestHeader("Range") String range) {
         System.out.println("range in bytes() : " + range);
         VideoInfoDto videoInfoDto = streamingService.getVideoInfo(id);
+
         return streamingService.getVideo(videoInfoDto.getName());
     }
 
