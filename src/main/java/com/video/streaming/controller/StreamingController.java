@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.io.FileNotFoundException;
+
 @RestController
 public class StreamingController {
 

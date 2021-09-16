@@ -4,6 +4,8 @@ import com.video.streaming.dto.VideoInfoDto;
 import com.video.streaming.entity.VideoInfo;
 import com.video.streaming.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.domain.Page;
@@ -14,15 +16,17 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.time.LocalDateTime;
 
 @Service
 @Transactional
 public class StreamingService {
 
-    private static final String FORMAT = "classpath:videoResources/%s.mp4";
-    @Autowired
-    private ResourceLoader resourceLoader;
+    @Value("${videoResourcesPath}")
+    private String FORMAT;
 
     @Autowired
     private VideoRepository videoRepository;
@@ -40,7 +44,7 @@ public class StreamingService {
     }
 
     public Mono<Resource> getVideo(String title) {
-        return Mono.fromSupplier(() -> resourceLoader.getResource(String.format(FORMAT, title)));
+        return Mono.fromSupplier(() -> new FileSystemResource(String.format(FORMAT, title)));
     }
 
     public void updateViewCountByOne(Long id) {
