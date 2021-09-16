@@ -44,3 +44,4 @@ src/main/resources/videoResources
 
 ### JPA ###
 generated
+/build/libs/VideoStreaming-0.0.1-SNAPSHOT-plain.jar
