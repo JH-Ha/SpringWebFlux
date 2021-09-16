@@ -25,7 +25,9 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build
+build/*
+!libs
+!build/libs/VideoStreaming-0.0.1-SNAPSHOT.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 

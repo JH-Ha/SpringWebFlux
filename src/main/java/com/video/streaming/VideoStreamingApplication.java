@@ -21,7 +21,7 @@ public class VideoStreamingApplication {
     //public static StreamingService streamingService;
 
     public static void main(String[] args) {
-       
+        System.out.println("started");
         SpringApplication.run(VideoStreamingApplication.class, args);
     }
 
